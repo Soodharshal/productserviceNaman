@@ -2,6 +2,7 @@ package dev.naman.productservice.services;
 
 import dev.naman.productservice.dtos.GenericProductDto;
 import dev.naman.productservice.exceptions.NotFoundException;
+import dev.naman.productservice.security.JwtObject;
 import dev.naman.productservice.thirdpartyclients.productsservice.fakestore.FakeStoreProductDto;
 import dev.naman.productservice.thirdpartyclients.productsservice.fakestore.FakeStoryProductServiceClient;
 import org.springframework.context.annotation.Primary;
@@ -42,7 +43,7 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) throws NotFoundException {
+    public GenericProductDto getProductById(Long id, String userIdTryingToAccess) throws NotFoundException {
         return convertFakeStoreProductIntoGenericProduct(fakeStoryProductServiceClient.getProductById(id));
     }
 

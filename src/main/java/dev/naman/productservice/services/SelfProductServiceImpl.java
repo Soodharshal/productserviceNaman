@@ -4,6 +4,7 @@ import dev.naman.productservice.dtos.GenericProductDto;
 import dev.naman.productservice.models.Product;
 import dev.naman.productservice.repositories.ProductRepository;
 import dev.naman.productservice.repositories.SelfProductRepository;
+import dev.naman.productservice.security.JwtObject;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class SelfProductServiceImpl implements ProductService {
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) {
+    public GenericProductDto getProductById(Long id, String userIdTryingToAccess) {
         Optional<Product> product =  selfProductRepository.findById(id);
         if(product.isEmpty()){
             return new GenericProductDto();
@@ -61,7 +62,7 @@ public class SelfProductServiceImpl implements ProductService {
                 genericProductDto.setPrice(product.getPrice().getPrice());
                 genericProductDto.setDescription(product.getDescription());
                 genericProductDto.setImage(product.getImage());
-                genericProductDto.setCategory(product.getCategory().getName());
+//                genericProductDto.setCategory(product.getCategory().getName());
                 genericProductDto.setId(1L);
                 genericProductDtos.add(genericProductDto);
             }
